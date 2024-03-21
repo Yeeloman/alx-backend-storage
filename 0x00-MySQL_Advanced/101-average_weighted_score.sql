@@ -1,8 +1,8 @@
 --  a SQL script that creates a stored procedure
 -- ComputeAverageWeightedScoreForUsers that
 -- computes and store the average weighted score for all students.
+DELIMITER //
 CREATE PROCEDURE ComputeAverageWeightedScoreForUsers()
-DELIMITER $$
 BEGIN
     UPDATE users
     SET average_score = (
@@ -11,5 +11,5 @@ BEGIN
         JOIN projects ON corrections.project_id = projects.id
         WHERE corrections.user_id = users.id
     );
-END$$
+END //
 DELIMITER ;
