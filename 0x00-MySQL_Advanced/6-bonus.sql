@@ -8,6 +8,5 @@ BEGIN
         INSERT INTO projects (name) VALUES (project_name);
         SET project_id = LAST_INSERT_ID();
     END IF;
-    INSERT INTO corrections (user_id, project_id, score)
-    VALUES ( user_id, project_id, score );
+    INSERT INTO corrections (user_id, project_id, score) VALUES ( user_id, project_id, score);
 END;
