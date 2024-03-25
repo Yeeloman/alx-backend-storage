@@ -5,7 +5,7 @@
 def top_students(mongo_collection):
     """ function that returns all
     students sorted by average score"""
-    pipline = [
+    return mongo_collection.aggregate([
         {
             "$project":
                 {
@@ -19,5 +19,4 @@ def top_students(mongo_collection):
                     "averageScore": -1
                 }
         }
-    ]
-    return mongo_collection.aggregate(pipline).sort("averageScore", -1)
+    ])
