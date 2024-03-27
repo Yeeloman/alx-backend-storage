@@ -8,7 +8,8 @@ from typing import Callable
 
 
 def count_url_access(method: Callable) -> Callable:
-    """count_url_access"""
+    """count_url_access: counts
+    how many times a url is accessed"""
     @wraps(method)
     def wrapper(url):
         """wrapper"""
@@ -28,12 +29,7 @@ def count_url_access(method: Callable) -> Callable:
 
 @count_url_access
 def get_page(url: str) -> str:
-    """get_page"""
-    try:
-        resp = requests.get(url)
-        if resp.status_code == 200:
-            return resp.text
-        return None
-    except Exception as e:
-        print(e)
-        return None
+    """get_page: returns
+    html content of a given url"""
+    resp = requests.get(url)
+    return resp.text
