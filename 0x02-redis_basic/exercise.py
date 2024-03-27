@@ -45,10 +45,10 @@ def replay(method: Callable) -> None:
     print("{} was called {} times:".format(method.__qualname__, len(in_el)))
     for i, o in zip(in_el, out_el):
         print(
-            f"{method.__qualname__}\
-                (*{i.decode('utf-8')}) \
-                    -> {o.decode('utf-8')}"
+            "{}(*{}) -> {}".format(
+                method.__qualname__, i.decode("utf-8"), o.decode("utf-8")
             )
+        )
 
 
 class Cache:
