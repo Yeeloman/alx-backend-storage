@@ -35,20 +35,20 @@ def call_history(method: Callable) -> Callable:
 
 
 def replay(method: Callable) -> None:
-    """doc doc class"""
-    input_key = "{}:inputs".format(method.__qualname__)
-    output_key = "{}:outputs".format(method.__qualname__)
+    """replay"""
+    inputs = f'{method.__qualname__}:inputs'
+    outputs = f'{method.__qualname__}:outputs'
 
-    inputs = method.__self__._redis.lrange(input_key, 0, -1)
-    outputs = method.__self__._redis.lrange(output_key, 0, -1)
+    in_el = method.__self__._redis.lrange(inputs, 0, -1)
+    out_el = method.__self__._redis.lrange(outputs, 0, -1)
 
-    print("{} was called {} times:".format(method.__qualname__, len(inputs)))
-    for inp, out in zip(inputs, outputs):
+    print("{} was called {} times:".format(method.__qualname__, len(in_el)))
+    for i, o in zip(in_el, out_el):
         print(
-            "{}(*{}) -> {}".format(
-                method.__qualname__, inp.decode("utf-8"), out.decode("utf-8")
+            f"{method.__qualname__}\
+                (*{i.decode('utf-8')}) \
+                    -> {o.decode('utf-8')}"
             )
-        )
 
 
 class Cache:
