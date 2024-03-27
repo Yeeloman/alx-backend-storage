@@ -36,8 +36,9 @@ def call_history(method: Callable) -> Callable:
 
 def replay(method: Callable) -> None:
     """replay"""
-    inputs = f'{method.__qualname__}:inputs'
-    outputs = f'{method.__qualname__}:outputs'
+    inputs = "{}:inputs".format(method.__qualname__)
+    outputs = "{}:outputs".format(method.__qualname__)
+
 
     in_el = method.__self__._redis.lrange(inputs, 0, -1)
     out_el = method.__self__._redis.lrange(outputs, 0, -1)
